@@ -1,0 +1,24 @@
+﻿cmake_minimum_required (VERSION 3.8)
+
+find_package(OpenAL CONFIG REQUIRED)
+find_package(SndFile CONFIG REQUIRED)
+
+add_library(EzAL EzAL.h ALlibs.h SoundBuffer.cpp SoundBuffer.h SoundDevice.cpp SoundDevice.h SoundSource.cpp SoundSource.h)
+
+target_compile_definitions(EzAL PUBLIC OPENAL)
+
+target_link_libraries(EzAL PUBLIC OpenAL::OpenAL)
+target_link_libraries(EzAL PUBLIC SndFile::sndfile)
+
+#cmake_minimum_required (VERSION 3.8)
+#
+#add_compile_definitions(OPENAL)
+#add_compile_definitions(DEBUG)
+#
+#find_package(OpenAL CONFIG REQUIRED)
+#find_package(SndFile CONFIG REQUIRED)
+#
+#add_executable(EzAL main.cpp SoundBuffer.cpp SoundBuffer.h SoundDevice.cpp SoundDevice.h SoundSource.cpp SoundSource.h "EzAL.h")
+#
+#target_link_libraries(EzAL PRIVATE OpenAL::OpenAL)
+#target_link_libraries(EzAL PRIVATE SndFile::sndfile)
