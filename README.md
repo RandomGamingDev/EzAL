@@ -2,7 +2,7 @@
 
 ### A powerful audio library designed to abstract away writing audio code at 0 cost. Spend time coding your dream project, not the audio.
 
-Compile this with CMake. (This comes with a demo of how to use this in EzALExe)
+Compile this with CMake. (This comes with a demo of how to use this in EzALExe, for which you'll have to create a test.ogg file in the directory next to the executable for it to play)
 
 The default audio library for this is openal-soft.
 
