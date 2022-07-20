@@ -3,16 +3,44 @@
 #ifdef OPENAL
 	SoundSource::SoundSource() {
 		alGenSources(1, &source);
-		alSourcef(source, AL_PITCH, pitch);
-		alSourcef(source, AL_GAIN, gain);
-		alSource3f(source, AL_POSITION, position[0], position[1], position[2]);
-		alSource3f(source, AL_VELOCITY, velocity[0], velocity[1], velocity[2]);
-		alSourcei(source, AL_LOOPING, loop);
-		alSourcei(source, AL_BUFFER, buffer);
+		UpdateSource();
 	}
 
 	SoundSource::~SoundSource() {
 		alDeleteSources(1, &source);
+	}
+
+	void SoundSource::UpdateSource() {
+		UpdatePitch();
+		UpdateGain();
+		UpdatePosition();
+		UpdateVelocity();
+		UpdateLooping();
+		UpdateBuffer();
+	}
+
+	void SoundSource::UpdatePitch() {
+		alSourcef(source, AL_PITCH, pitch);
+	}
+
+	void SoundSource::UpdateGain() {
+		alSourcef(source, AL_GAIN, gain);
+	}
+
+	void SoundSource::UpdatePosition() {
+		alSource3f(source, AL_POSITION, position[0], position[1], position[2]);
+	}
+
+	void SoundSource::UpdateVelocity() {
+		alSource3f(source, AL_VELOCITY, velocity[0], velocity[1], velocity[2]);
+	}
+
+	void SoundSource::UpdateLooping() {
+		alSourcei(source, AL_LOOPING, loop);
+	}
+
+	void SoundSource::UpdateBuffer() {
+		alSourcei(source, AL_BUFFER, buffer);
 	}
 
 	ALint SoundSource::GetState() {

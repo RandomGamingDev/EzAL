@@ -5,9 +5,9 @@
 
 int main() {
 	while (true) {
-		SoundDevice mysounddevice = SoundDevice(NULL);
+		SoundDevice mysounddevice(NULL);
 
-		SoundBuffer sound = SoundBuffer("./test.ogg");
+		SoundBuffer sound(SoundBuffer::GetOggData("./test.ogg"));
 
 		SoundSource speaker;
 
