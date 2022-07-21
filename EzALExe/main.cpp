@@ -11,7 +11,9 @@ int main() {
 
 		SoundSource speaker;
 
-		speaker.Play(sound.buffer);
+		speaker.buffer = sound.buffer;
+		speaker.UpdateBuffer();
+		speaker.Play();
 		while (speaker.GetState() == AL_PLAYING);
 
 		std::cout << "got here\n";

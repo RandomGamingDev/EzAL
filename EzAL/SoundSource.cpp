@@ -3,7 +3,31 @@
 #ifdef OPENAL
 	SoundSource::SoundSource() {
 		alGenSources(1, &source);
-		UpdateSource();
+		UpdatePitch();
+		UpdateGain();
+		UpdatePosition();
+		UpdateVelocity();
+		UpdateLooping();
+	}
+
+	SoundSource::SoundSource(
+		ALfloat pitch,
+		ALfloat gain,
+		std::array<ALfloat, 3> position,
+		std::array<ALfloat, 3> velocity,
+		ALboolean loop
+	) {
+		this->pitch = pitch;
+		this->gain = gain;
+		this->position = position;
+		this->velocity = velocity;
+		this->loop = loop;
+		alGenSources(1, &source);
+		UpdatePitch();
+		UpdateGain();
+		UpdatePosition();
+		UpdateVelocity();
+		UpdateLooping();
 	}
 
 	SoundSource::SoundSource(
@@ -67,9 +91,7 @@
 		return state;
 	}
 
-	void SoundSource::Play(const ALuint buffer_to_play) {
-		buffer = buffer_to_play;
-		alSourcei(source, AL_BUFFER, static_cast<ALint>(buffer));
+	void SoundSource::Play() {
 		alSourcePlay(source);
 	}
 #endif

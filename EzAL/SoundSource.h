@@ -18,6 +18,13 @@ public:
 		std::array<ALfloat, 3> velocity,
 		ALboolean loop
 	);
+	SoundSource(
+		ALfloat pitch,
+		ALfloat gain,
+		std::array<ALfloat, 3> position,
+		std::array<ALfloat, 3> velocity,
+		ALboolean loop
+	);
 	~SoundSource();
 	
 	void UpdateSource();
@@ -30,7 +37,7 @@ public:
 
 	#ifdef OPENAL
 	ALint GetState();
-	void Play(const ALuint buffer_to_play);
+	void Play();
 	
 	ALuint source;
 	ALuint buffer;
