@@ -34,7 +34,7 @@ public:
 	void StoreBuffer(BufferData data);
 	static BufferData GetOggData(const char* filename);
 
-	uint32_t buffer = 0;
+	ALuint buffer;
 };
 
 #endif

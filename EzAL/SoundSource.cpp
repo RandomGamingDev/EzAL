@@ -6,6 +6,24 @@
 		UpdateSource();
 	}
 
+	SoundSource::SoundSource(
+		ALuint buffer,
+		ALfloat pitch,
+		ALfloat gain,
+		std::array<ALfloat, 3> position,
+		std::array<ALfloat, 3> velocity,
+		ALboolean loop
+	) {
+		this->buffer = buffer;
+		this->pitch = pitch;
+		this->gain = gain;
+		this->position = position;
+		this->velocity = velocity;
+		this->loop = loop;
+		alGenSources(1, &source);
+		UpdateSource();
+	}
+
 	SoundSource::~SoundSource() {
 		alDeleteSources(1, &source);
 	}
