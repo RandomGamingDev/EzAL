@@ -11,13 +11,22 @@
 class SoundDevice {
 public:
 	#ifdef OPENAL
+	ALCdevice* device;
+	ALCcontext* context;
+	#endif
+
+	#ifdef OPENAL
 	SoundDevice(const ALCchar* deviceName);
 	#endif
 	~SoundDevice();
 
 	#ifdef OPENAL
-	ALCdevice* device;
-	ALCcontext* context;
+	void Init(const ALCchar* deviceName);
+	static void Init(const ALCchar* deviceName, ALCdevice** device, ALCcontext** context);
+	#endif
+	void Delete();
+	#ifdef OPENAL
+	static void Delete(ALCdevice* device, ALCcontext* context);
 	#endif
 };
 

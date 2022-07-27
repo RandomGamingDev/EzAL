@@ -11,10 +11,12 @@ int main() {
 
 		SoundSource speaker;
 
-		speaker.buffer = sound.buffer;
-		speaker.UpdateBuffer();
+		ALuint buffers[] = { sound.ID };
+		speaker.buffersSize = 1;
+		speaker.buffers = buffers;
+		speaker.QueueBuffers();
 		speaker.Play();
-		while (speaker.GetState() == AL_PLAYING);
+		while (speaker.GetState(AL_SOURCE_STATE) == AL_PLAYING);
 
 		std::cout << "got here\n";
 	}

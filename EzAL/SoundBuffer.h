@@ -28,13 +28,20 @@ struct BufferData {
 
 class SoundBuffer {
 public:
+	#ifdef OPENAL
+	ALuint ID;
+	#endif
+
 	SoundBuffer(BufferData data);
 	~SoundBuffer();
 
+	void Init(BufferData data);
+	static void Init(ALuint* ID, BufferData data);
 	void StoreBuffer(BufferData data);
+	static void StoreBuffer(ALuint* ID, BufferData data);
 	static BufferData GetOggData(const char* filename);
-
-	ALuint buffer;
+	void Delete();
+	static void Delete(ALuint* ID);
 };
 
 #endif

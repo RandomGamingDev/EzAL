@@ -2,23 +2,35 @@
 
 #ifdef OPENAL
 	SoundBuffer::SoundBuffer(BufferData data) {
-		alGenBuffers(1, &buffer);
-		StoreBuffer(data);
-		free(data.data);
+		Init(data);
 	}
 
 	SoundBuffer::~SoundBuffer() {
-		alDeleteBuffers(1, &buffer);
+		Delete();
+	}
+
+	void SoundBuffer::Init(BufferData data) {
+		Init(&ID, data);
+	}
+
+	void SoundBuffer::Init(ALuint* ID, BufferData data) {
+		alGenBuffers(1, ID);
+		StoreBuffer(ID, data);
+		free(data.data);
 	}
 
 	void SoundBuffer::StoreBuffer(BufferData data) {
-		alBufferData(buffer, data.format, data.data, data.size, data.freq);
+		StoreBuffer(&ID, data);
+	}
+
+	void SoundBuffer::StoreBuffer(ALuint* ID, BufferData data) {
+		alBufferData(*ID, data.format, data.data, data.size, data.freq);
 		
 		ALenum err = alGetError();
 		if (err != AL_NO_ERROR) {
 			std::cout << "ERROR: OpenAL Error: " << alGetString(err) << '\n';
-			if (buffer && alIsBuffer(buffer))
-				alDeleteBuffers(1, &buffer);
+			if (ID && alIsBuffer(*ID))
+				alDeleteBuffers(1, ID);
 			return;
 		}
 	}
@@ -63,5 +75,13 @@
 
 		sf_close(sndfile);
 		return BufferData(format, data, size, sfinfo.samplerate);
+	}
+
+	void SoundBuffer::Delete() {
+		Delete(&ID);
+	}
+
+	void SoundBuffer::Delete(ALuint* ID) {
+		alDeleteBuffers(1, ID);
 	}
 #endif
