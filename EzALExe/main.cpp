@@ -3,6 +3,8 @@
 
 #include "EzAL.h"
 
+#include <glad/glad.h>
+
 int main() {
 	while (true) {
 		SoundDevice mysounddevice(NULL);

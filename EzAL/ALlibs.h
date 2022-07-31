@@ -1,8 +1,6 @@
 #ifndef ALLIBS_HEADER
 #define ALLIBS_HEADER
 
-#define OPENAL
-
 #ifdef OPENAL
 #include <AL\al.h>
 #include <AL\alc.h>
