@@ -1,3 +1,4 @@
+// Includes
 #include <iostream>
 #include <thread>
 
@@ -8,13 +9,15 @@
 int main() {
 	while (true) {
 		SoundDevice mysounddevice(NULL);
-
+                
+                // Set audio file
 		SoundData data = SoundBuffer::GetOggData("./test.ogg");
 		SoundBuffer sound(data);
 		free(data.data);
-
+    
 		SoundSource speaker;
 
+                // Configure buffer and play
 		ALuint* buffers = new ALuint[1] {sound.ID};
 		speaker.buffersSize = 1;
 		speaker.buffers = buffers;
