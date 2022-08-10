@@ -9,11 +9,13 @@ int main() {
 	while (true) {
 		SoundDevice mysounddevice(NULL);
 
-		SoundBuffer sound(SoundBuffer::GetOggData("./test.ogg"));
+		SoundData data = SoundBuffer::GetOggData("./test.ogg");
+		SoundBuffer sound(data);
+		free(data.data);
 
 		SoundSource speaker;
 
-		ALuint buffers[] = { sound.ID };
+		ALuint* buffers = new ALuint[1] {sound.ID};
 		speaker.buffersSize = 1;
 		speaker.buffers = buffers;
 		speaker.QueueBuffers();

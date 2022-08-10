@@ -12,13 +12,13 @@
 #include <array>
 #include <vector>
 
-struct BufferData {
+struct SoundData {
 	ALenum format;
 	short* data;
 	ALsizei size;
 	ALsizei freq;
 
-	BufferData(ALenum format = (ALenum)nullptr, short* data = nullptr, ALsizei size = (ALsizei)nullptr, ALsizei freq = (ALsizei)nullptr) {
+	SoundData(ALenum format = (ALenum)nullptr, short* data = nullptr, ALsizei size = (ALsizei)nullptr, ALsizei freq = (ALsizei)nullptr) {
 		this->format = format;
 		this->data = data;
 		this->size = size;
@@ -32,14 +32,14 @@ public:
 	ALuint ID;
 	#endif
 
-	SoundBuffer(BufferData data);
+	SoundBuffer(SoundData data);
 	~SoundBuffer();
 
-	void Init(BufferData data);
-	static void Init(ALuint* ID, BufferData data);
-	void StoreBuffer(BufferData data);
-	static void StoreBuffer(ALuint* ID, BufferData data);
-	static BufferData GetOggData(const char* filename);
+	void Init(SoundData data);
+	static void Init(ALuint* ID, SoundData data);
+	void StoreBuffer(SoundData data);
+	static void StoreBuffer(ALuint* ID, SoundData data);
+	static SoundData GetOggData(const char* filename);
 	void Delete();
 	static void Delete(ALuint* ID);
 };

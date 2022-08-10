@@ -1,7 +1,7 @@
 #include "SoundBuffer.h"
 
 #ifdef OPENAL
-	SoundBuffer::SoundBuffer(BufferData data) {
+	SoundBuffer::SoundBuffer(SoundData data) {
 		Init(data);
 	}
 
@@ -9,21 +9,20 @@
 		Delete();
 	}
 
-	void SoundBuffer::Init(BufferData data) {
+	void SoundBuffer::Init(SoundData data) {
 		Init(&ID, data);
 	}
 
-	void SoundBuffer::Init(ALuint* ID, BufferData data) {
+	void SoundBuffer::Init(ALuint* ID, SoundData data) {
 		alGenBuffers(1, ID);
 		StoreBuffer(ID, data);
-		free(data.data);
 	}
 
-	void SoundBuffer::StoreBuffer(BufferData data) {
+	void SoundBuffer::StoreBuffer(SoundData data) {
 		StoreBuffer(&ID, data);
 	}
 
-	void SoundBuffer::StoreBuffer(ALuint* ID, BufferData data) {
+	void SoundBuffer::StoreBuffer(ALuint* ID, SoundData data) {
 		alBufferData(*ID, data.format, data.data, data.size, data.freq);
 		
 		ALenum err = alGetError();
@@ -35,17 +34,17 @@
 		}
 	}
 
-	BufferData SoundBuffer::GetOggData(const char* filename) {
+	SoundData SoundBuffer::GetOggData(const char* filename) {
 		SF_INFO sfinfo;
 		SNDFILE* sndfile = sf_open(filename, SFM_READ, &sfinfo);
 		if (!sndfile) {
 			std::cout << "ERROR: Could not open audio in " << filename << ": " << sf_strerror(sndfile);
-			return BufferData();
+			return SoundData();
 		}
 		if (sfinfo.frames < 1 || sfinfo.frames > static_cast<sf_count_t>((INT_MAX / sizeof(short)) / sfinfo.channels)) {
 			std::cout << "ERROR: Bad sample count in " << filename << '(' << sfinfo.frames << ")\n";
 			sf_close(sndfile);
-			return BufferData();
+			return SoundData();
 		}
 
 		ALenum format = AL_NONE;
@@ -58,7 +57,7 @@
 			sfinfo.channels < 1 || sfinfo.channels > 4) {
 			std::cout << "ERROR: Unsupported channel count: " << sfinfo.channels << '\n';
 			sf_close(sndfile);
-			return BufferData();
+			return SoundData();
 		}
 		format = formats[sfinfo.channels - 1];
 
@@ -69,12 +68,12 @@
 			std::cout << "ERROR: Failed to read samples in " << filename << '(' << num_frames << ")\n";
 			sf_close(sndfile);
 			free(data);
-			return BufferData();
+			return SoundData();
 		}
 		ALsizei size = static_cast<ALsizei>(num_frames * sfinfo.channels) * sizeof(short);
 
 		sf_close(sndfile);
-		return BufferData(format, data, size, sfinfo.samplerate);
+		return SoundData(format, data, size, sfinfo.samplerate);
 	}
 
 	void SoundBuffer::Delete() {
