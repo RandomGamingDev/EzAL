@@ -21,5 +21,4 @@ Thanks to Code, Tech, and Tutorials for some of the code!<br/>
 You can find their channel here: https://www.youtube.com/c/CodeTechandTutorials<br/>
 the video for it here: https://www.youtube.com/watch?v=kWQM1iQ1W0E<br/>
 their github here: https://github.com/codetechandtutorials<br/>
-and their code here: https://github.com/codetechandtutorials/openal-impl/releases/tag/vid1<br/>
 and their code here: https://github.com/codetechandtutorials/openal-impl/releases/tag/vid1
