@@ -1,6 +1,6 @@
 # EzAL
 
-### A powerful audio library designed to abstract away writing audio code at 0 cost. Spend time coding your dream project, not the audio.
+### A powerful audio library designed to abstract away writing audio code at 0 cost. Spend time coding your dream project, not the audio. (remember to clone this project with --recursive)
 
 There currently isn't any direct documentation since the header files + OpenAL documentation should be enough since EzAL is designed to be very very similar to them except C++ and with an extra layer so that different APIs can be used too.
 
