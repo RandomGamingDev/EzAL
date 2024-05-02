@@ -1,10 +1,10 @@
 # EzAL
 
-### A powerful audio library designed to abstract away writing audio code at 0 cost. Spend time coding your dream project, not the audio. (remember to clone this project with --recursive)
+### A powerful audio library designed to abstract away writing audio code at 0 cost. Spend time coding your dream project, not the audio.
 
 There currently isn't any direct documentation since the header files + OpenAL documentation should be enough since EzAL is designed to be very very similar to them except C++ and with an extra layer so that different APIs can be used too.
 
-Compile this with CMake. (This comes with a demo of how to use this in EzALExe, for which you'll have to create a test.ogg file in the directory next to the executable for it to play)
+First, clone this project with git and using the --recursive argument. Compile this with CMake. (This comes with a demo of how to use this in EzALExe, for which you'll have to create a test.ogg file in the directory next to the executable for it to play)
 
 The default audio library for this is openal-soft.
 
